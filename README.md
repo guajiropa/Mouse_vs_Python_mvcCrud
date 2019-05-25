@@ -1,1 +1,2 @@
-# Mouse_vs_Python_mvcCrud
+# Mouse vs Python 
+*MVC Crud tutorial*
