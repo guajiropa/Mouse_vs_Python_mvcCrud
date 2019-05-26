@@ -25,11 +25,14 @@
     <Compile Include="addModRecord.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="commonDlgs.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="main.py" />
     <Compile Include="model.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="main_view.py">
+    <Compile Include="mainView.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

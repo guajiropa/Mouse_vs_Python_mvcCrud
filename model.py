@@ -1,5 +1,5 @@
 """
-AUTHOR      : Robert James Patterson
+AUTHOR      : Robert James Patterson (by Mike Driscoll)
 DATE        : 05/25/19
 SYNOPSIS    : Work thru files for the 'Mouse vs. Python' MVC/CRUD tutorial. This file contains
             the classes that make the tables in the 'bookdata' database. The 
@@ -60,5 +60,7 @@ class Book(DeclarativeBase):
     def __repl__(self):
         return "<%s released by %s>" % (str(self.title), str(self.publisher))
 
+
 if __name__ == "__main__":
-    metadata.create_all()
+    # Uncomment the last line and run this file as a script to generate the database
+    #metadata.create_all()
