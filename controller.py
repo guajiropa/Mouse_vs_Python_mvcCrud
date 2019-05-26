@@ -1,6 +1,6 @@
 """
 AUTHOR      : Robert James Patterson (by Mike Driscoll)
-DATE        : 05/25/19
+DATE        : 05/26/19
 SYNOPSIS    : Work thru files for the 'Mouse vs. Python' MVC/CRUD tutorial.
 """
 from model import Book, Person, OlvBook
@@ -43,7 +43,26 @@ def connectToDatabase():
     return session
 
 def convertResults(results):
-    pass
+    """
+    Format the 'results' for the OlvBooks objects and return it as a list
+    """
+
+    # this print statement is here for debugging
+    print
+
+    books = []
+    for record in results:
+        author = "%s %s" % (record.person.first_name, record.person.last_name)
+        book = OlvBook(record.id,
+                       record.title,
+                       author,
+                       record.isbn,
+                       record.publisher,
+                       record.person.last_name,
+                       record.person.first_name
+                       )
+        books.append(book)
+    return books
 
 def deleteRecord(idNum):
     pass
