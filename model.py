@@ -61,6 +61,6 @@ class Book(DeclarativeBase):
         return "<%s released by %s>" % (str(self.title), str(self.publisher))
 
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
     # Uncomment the last line and run this file as a script to generate the database
     #metadata.create_all()

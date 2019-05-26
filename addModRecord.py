@@ -28,7 +28,7 @@ class AddModRecDialog(wx.Dialog):
             bTitle = fName = lName = isbn = publisher = ""
 
         size = (80, -1)
-        font = wx.Font(18, wx.HELVETICA, wx.NORMAL, wx.BOLD)
+        font = wx.Font(18, wx.SWISS, wx.NORMAL, wx.BOLD)
 
         # Create the sizers
         mainSizer = wx.BoxSizer(wx.VERTICAL)
@@ -37,17 +37,17 @@ class AddModRecDialog(wx.Dialog):
 
         # Create some widgits
         lblNewRec = wx.StaticText(self, label="New Record")
-        lblNewRec = wx.SetFont(font)
+        lblNewRec.SetFont(font)
         mainSizer.Add(lblNewRec, 0, wx.CENTER)
 
-        font = wx.Font(12, wx.HELVETICA, wx.NORMAL, wx.BOLD)
+        font = wx.Font(12, wx.SWISS, wx.NORMAL, wx.BOLD)
         lblTitle = wx.StaticText(self, label="Title:", size=size)
         lblTitle.SetFont(font)
         self.txtTitle = wx.TextCtrl(self, value=bTitle)
         mainSizer.Add(self.rowBuilder([lblTitle, self.txtTitle]), 0, wx.EXPAND)
 
         lblAuthor = wx.StaticText(self, label="Author:", size=size)
-        lblAuthor = SetFont(font)
+        lblAuthor.SetFont(font)
         authorSizer.Add(lblAuthor, 0, wx.ALL, 5)
         self.txtFirstName = wx.TextCtrl(self, value=fName)
         authorSizer.Add(self.txtFirstName, 1, wx.EXPAND|wx.ALL, 5)
@@ -85,12 +85,12 @@ class AddModRecDialog(wx.Dialog):
 
         fName = self.txtFirstName.GetValue()
         lName = self.txtLastName.GetValue()
-        title = self.txtTile.GetValue()
+        title = self.txtTitle.GetValue()
         isbn = self.txtIsbn.GetValue()
         publisher = self.txtPublisher.GetValue()
 
         if fName == "" or title == "":
-            commonDlgs.showMessageDlg("Author and Title are required!", "Error!", wx.ICON_ERROR)
+            commonDlgs.showMessageDlg("Author and Title are required!", "Error!")
             return
 
         if "-" in isbn:
@@ -119,30 +119,40 @@ class AddModRecDialog(wx.Dialog):
         for child in self.GetChildren():
             if isinstance(child, wx.TextCtrl):
                 child.SetValue("")
-
-    def onClose(self, event):
-        """ 
-        Cancel the dialog.
-        """
-        self.Destroy()
       
     def onEdit(self):
         
         dictAuthor, dictBook = self.getData()
         dictCombo = dict(dictAuthor.items() + dictBook.items())
         controller.editRecord(self.selectedRow.id, dictCombo)
-
-
+        commonDlgs.showMessageDlg("Edited Successfully!", "Success!", wx.ICON_INFORMATION)
+        self.Destroy()
 
     def onRecord(self, event):
-        pass
+        
+        if self.addRecord:
+            self.onAdd()
+        else:
+            self.onEdit
 
-    def rowBuilder(self, wigets):
-        pass
+        self.txtTitle.SetFocus()
 
+    def onClose(self, event):
+        """ 
+        Cancel the dialog.
+        """
+        self.Destroy()
+
+    def rowBuilder(self, widgets):
+        """ """
+        sizer = wx.BoxSizer(wx.HORIZONTAL)
+        lbl, txt = widgets
+        sizer.Add(lbl, 0, wx.ALL, 5)
+        sizer.Add(txt, 1, wx.EXPAND|wx.ALL, 5)
+        return sizer
 
 if __name__ == "__main__":
     app = wx.App(False)
-    dlg = AddRecDialog()
+    dlg = AddModRecDialog()
     dlg.ShowModal()
     app.MainLoop()
