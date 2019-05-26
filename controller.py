@@ -1,7 +1,8 @@
 """
 AUTHOR      : Robert James Patterson (by Mike Driscoll)
 DATE        : 05/26/19
-SYNOPSIS    : Work thru files for the 'Mouse vs. Python' MVC/CRUD tutorial.
+SYNOPSIS    : Work thru files for the 'Mouse vs. Python' MVC/CRUD tutorial. This file is the heart of
+                the appliction and handles the interactions with the database.
 """
 from model import Book, Person, OlvBook
 from sqlalchemy import create_engine
@@ -46,8 +47,8 @@ def convertResults(results):
     """
     Format the 'results' for the OlvBooks objects and return it as a list
     """
-
-    # this print statement is here for debugging
+    # Not sure of purpose, but these 'print' statements with no parameters appear in a few
+    # routines in the original tutorial.
     print
 
     books = []
@@ -80,7 +81,11 @@ def editRecord(idNum, row):
     """
     session = connectToDatabase()
     record = session.query(Book).filter_by(id=idNum).one()
+    
+    # Not sure of purpose, but these 'print' statements with no parameters appear in a few
+    # routines in the original tutorial.
     print
+    
     record.title = row['title']
     record.person.first_name = row['first_name']
     record.person.last_name = row['last_name']
@@ -95,9 +100,38 @@ def getAllRecords():
     """ 
     Get all of the records and return them.
     """
+    session = connectToDatabase()
+    result = session.query(Book).all()
+    books = convertResults(result)
+    session.close()
 
+    return books
 
 def searchRecords(filterChoice, keyword):
-    pass
+    """ 
+    Search based on an end user provieded keyword.
+    """
+    session = connectToDatabase()
+    if filterChoice == 'Author':
+        qry = session.query(Person)
+        result = qry.filter(Person.first_name.contains('%s' % keyword)).all()
+        records = []
+        for record in result:
+            for book in record.books:
+                records.append(book)
 
+        result = records
+        print(result)
 
+    elif filterChoice == 'Title':
+        qry = session.query(Book)
+        result = qry.filter(Book.title.contains('%s' % keyword)).all()
+    elif filterChoice == "ISBN":
+        qry = session.query(Book)
+        result = qry.filter(Book.isbn.contains('%s' % keyword)).all()
+    else:
+        qry = session.query(Book)
+        result = qry.filter(Book.publisher.contains('%s' % keyword)).all()    
+    books = convertResults(result)
+    print
+    return books

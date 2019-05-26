@@ -5,8 +5,10 @@ SYNOPSIS    : Work thru files for the 'Mouse vs. Python' MVC/CRUD tutorial.
 """
 import wx
 
-def showMessageDialog(message, caption, flag=wx.ICON_ERROR):
-    """ """
+def showMessageDlg(message, caption, flag=wx.ICON_ERROR):
+    """ 
+    wx.MessageDialog handeler
+    """
     msg = wx.MessageDialog(None, message=message, caption=caption, style=flag)
     msg.ShowModal()
     msg.Destroy()
