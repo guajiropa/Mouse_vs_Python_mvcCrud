@@ -7,6 +7,15 @@ from model import Book, Person, OlvBook
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+def connectToDatabase():
+    """ 
+    Connect to our SQLite database and return a Session object.
+    """
+    engine = create_engine('sqlite:///data/bookdata.db', echo=True)
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    return session
+
 def addRecord(data):
     """
     The incoming 'data' paramater should be a tuple of two dictionaries in the following 
@@ -33,15 +42,6 @@ def addRecord(data):
     session.commit()
     session.close
 
-def connectToDatabase():
-    """ 
-    Connect to our SQLite database and return a Session object.
-    """
-    engine = create_engine('sqlite:///data/bookdata.db', echo=True)
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    return session
-
 def convertResults(results):
     """
     Format the 'results' for the OlvBooks objects and return it as a list
@@ -65,13 +65,37 @@ def convertResults(results):
     return books
 
 def deleteRecord(idNum):
-    pass
+    """ 
+    Delete a record from the database
+    """
+    session = connectToDatabase()
+    record = session.query(Book).filter_by(id=idNum).one()
+    session.delete(record)
+    session.commit()
+    session.close()
 
 def editRecord(idNum, row):
-    pass
+    """
+    Edit a record and save changes to the database.
+    """
+    session = connectToDatabase()
+    record = session.query(Book).filter_by(id=idNum).one()
+    print
+    record.title = row['title']
+    record.person.first_name = row['first_name']
+    record.person.last_name = row['last_name']
+    record.isbn = row['isbn']
+    record.publisher = row['publisher']
+
+    session.add(record)
+    session.commit()
+    session.close()
 
 def getAllRecords():
-    pass
+    """ 
+    Get all of the records and return them.
+    """
+
 
 def searchRecords(filterChoice, keyword):
     pass
