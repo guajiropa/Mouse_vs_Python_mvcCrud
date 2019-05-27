@@ -145,7 +145,9 @@ class AddModRecDialog(wx.Dialog):
         self.Destroy()
 
     def rowBuilder(self, widgets):
-        """ """
+        """ 
+        Utility to build label/textbox rows to be added to the sizer
+        """
         sizer = wx.BoxSizer(wx.HORIZONTAL)
         lbl, txt = widgets
         sizer.Add(lbl, 0, wx.ALL, 5)
