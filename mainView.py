@@ -71,7 +71,6 @@ class BookPanel(wx.Panel):
         mainSizer.Add(btnSizer, 0, wx.CENTER)
         self.SetSizer(mainSizer)
         
-    #----------------------------------------------------------------------
     def onAddRecord(self, event):
         """
         Add a record to the database
@@ -81,7 +80,6 @@ class BookPanel(wx.Panel):
         dlg.Destroy()
         self.showAllRecords()
         
-    #----------------------------------------------------------------------
     def onEditRecord(self, event):
         """
         Edit a record
@@ -96,7 +94,6 @@ class BookPanel(wx.Panel):
         dlg.Destroy()
         self.showAllRecords()
         
-    #----------------------------------------------------------------------
     def onDelete(self, event):
         """
         Delete a record
@@ -108,7 +105,6 @@ class BookPanel(wx.Panel):
         controller.deleteRecord(selectedRow.id)
         self.showAllRecords()
         
-    #----------------------------------------------------------------------
     def onSearch(self, event):
         """
         Searches database based on the user's filter choice and keyword
@@ -119,14 +115,12 @@ class BookPanel(wx.Panel):
         self.bookResults = controller.searchRecords(filterChoice, keyword)
         self.setBooks()
         
-    #----------------------------------------------------------------------
     def onShowAllRecord(self, event):
         """
         Updates the record list to show all of them
         """
         self.showAllRecords()
         
-    #----------------------------------------------------------------------
     def setBooks(self):
         self.bookResultsOlv.SetColumns([
             ColumnDefn("Title", "left", 350, "title"),
@@ -135,23 +129,21 @@ class BookPanel(wx.Panel):
             ColumnDefn("Publisher", "left", 150, "publisher")
         ])
         self.bookResultsOlv.SetObjects(self.bookResults)
-
-    #----------------------------------------------------------------------        
+       
     def showAllRecords(self):
         """
         Show all records in the object list view control
         """
         self.bookResults = controller.getAllRecords()
         self.setBooks()
-
-    #----------------------------------------------------------------------        
+        
     def onClose(self, event):
         """ 
         Exit the app.
         """
         wx.Exit()
 
-    #----------------------------------------------------------------------
+
 class BookFrame(wx.Frame):
     """
     """
@@ -163,7 +155,7 @@ class BookFrame(wx.Frame):
         
         self.Show()
         
-#----------------------------------------------------------------------
+
 #if __name__ == "__main__":
 #    app = wx.App(False)
 #    frame = BookFrame()
