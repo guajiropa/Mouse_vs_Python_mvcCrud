@@ -124,6 +124,7 @@ class AddModRecDialog(wx.Dialog):
         
         dictAuthor, dictBook = self.getData()
         dictCombo = dict(dictAuthor.items() + dictBook.items())
+        print(dictCombo)
         controller.editRecord(self.selectedRow.id, dictCombo)
         commonDlgs.showMessageDlg("Edited Successfully!", "Success!", wx.ICON_INFORMATION)
         self.Destroy()
@@ -133,7 +134,7 @@ class AddModRecDialog(wx.Dialog):
         if self.addRecord:
             self.onAdd()
         else:
-            self.onEdit
+            self.onEdit()
 
         self.txtTitle.SetFocus()
 
@@ -151,8 +152,8 @@ class AddModRecDialog(wx.Dialog):
         sizer.Add(txt, 1, wx.EXPAND|wx.ALL, 5)
         return sizer
 
-if __name__ == "__main__":
-    app = wx.App(False)
-    dlg = AddModRecDialog()
-    dlg.ShowModal()
-    app.MainLoop()
+#if __name__ == "__main__":
+#    app = wx.App(False)
+#    dlg = AddModRecDialog()
+#    dlg.ShowModal()
+#    app.MainLoop()

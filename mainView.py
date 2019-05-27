@@ -135,25 +135,26 @@ class BookPanel(wx.Panel):
             ColumnDefn("Publisher", "left", 150, "publisher")
         ])
         self.bookResultsOlv.SetObjects(self.bookResults)
-        
-    #----------------------------------------------------------------------
+
+    #----------------------------------------------------------------------        
     def showAllRecords(self):
         """
         Show all records in the object list view control
         """
         self.bookResults = controller.getAllRecords()
         self.setBooks()
-        
+
+    #----------------------------------------------------------------------        
     def onClose(self, event):
         """ 
-        Cancel the dialog.
+        Exit the app.
         """
-        parent.Destroy()
-
-class BookFrame(wx.Frame):
-    """"""
+        wx.Exit()
 
     #----------------------------------------------------------------------
+class BookFrame(wx.Frame):
+    """
+    """
     def __init__(self):
         """Constructor"""
         wx.Frame.__init__(self, None, title="MvP Media Organizer",
