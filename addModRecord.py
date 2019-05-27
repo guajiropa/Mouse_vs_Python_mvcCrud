@@ -8,7 +8,6 @@ import commonDlgs
 import controller
 import wx
 
-
 class AddModRecDialog(wx.Dialog):
     """
     The dialog used to Add / Modify records
