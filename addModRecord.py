@@ -36,7 +36,7 @@ class AddModRecDialog(wx.Dialog):
         btnSizer = wx.BoxSizer(wx.HORIZONTAL)
 
         # Create some widgits
-        lblNewRec = wx.StaticText(self, label="New Record")
+        lblNewRec = wx.StaticText(self, label=('%s' % title))
         lblNewRec.SetFont(font)
         mainSizer.Add(lblNewRec, 0, wx.CENTER)
 

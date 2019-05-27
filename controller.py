@@ -82,8 +82,6 @@ def editRecord(idNum, row):
     session = connectToDatabase()
     record = session.query(Book).filter_by(id=idNum).one()
     
-    # Not sure of purpose, but these 'print' statements with no parameters appear in a few
-    # routines in the original tutorial.
     print
     
     record.title = row['title']
