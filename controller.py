@@ -1,6 +1,6 @@
 """
 AUTHOR      : Robert James Patterson (by Mike Driscoll)
-DATE        : 05/26/19
+DATE        : 05/27/19
 SYNOPSIS    : Work thru files for the 'Mouse vs. Python' MVC/CRUD tutorial. This file is the heart of
                 the appliction and handles the interactions with the database.
 """

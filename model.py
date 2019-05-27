@@ -1,6 +1,6 @@
 """
 AUTHOR      : Robert James Patterson (by Mike Driscoll)
-DATE        : 05/25/19
+DATE        : 05/27/19
 SYNOPSIS    : Work thru files for the 'Mouse vs. Python' MVC/CRUD tutorial. This file contains
             the classes that make the tables in the 'bookdata' database. The 
             'metadata.create_all()' statment at the end of this file is the one that will 

@@ -1,6 +1,6 @@
 """
 AUTHOR      : Robert James Patterson (by Mike Driscoll)
-DATE        : 05/25/19
+DATE        : 05/27/19
 SYNOPSIS    : Work thru files for the 'Mouse vs. Python' MVC/CRUD tutorial. This is the dialog 
             that will allow the end user to add and modify records
 """
