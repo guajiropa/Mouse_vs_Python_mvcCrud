@@ -1,6 +1,6 @@
 """
-AUTHOR      : Robert James Patterson (by Mike Driscoll)
-DATE        : 05/27/19
+AUTHOR      : Robert James Patterson 
+DATE        : 06/03/19
 SYNOPSIS    : Work thru files for the 'Mouse vs. Python' MVC/CRUD tutorial. This is the dialog 
             that will allow the end user to add and modify records
 """
@@ -120,11 +120,13 @@ class AddModRecDialog(wx.Dialog):
                 child.SetValue("")
       
     def onEdit(self):
-        
+        """ 
+        Method to edit data from the database
+        """
         dictAuthor, dictBook = self.getData()
-        dictCombo = dict(dictAuthor.items() + dictBook.items())
-        print(dictCombo)
-        controller.editRecord(self.selectedRow.id, dictCombo)
+        data = ({'author': dictAuthor, 'book': dictBook})
+        
+        controller.editRecord(self.selectedRow.id, data)
         commonDlgs.showMessageDlg("Edited Successfully!", "Success!", wx.ICON_INFORMATION)
         self.Destroy()
 

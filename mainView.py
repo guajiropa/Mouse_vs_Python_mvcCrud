@@ -1,5 +1,5 @@
 """
-AUTHOR      : Robert James Patterson (by Mike Driscoll)
+AUTHOR      : Robert James Patterson 
 DATE        : 05/27/19
 SYNOPSIS    : Work thru files for the 'Mouse vs. Python' MVC/CRUD tutorial.
 """

@@ -1,6 +1,6 @@
 """
 AUTHOR      : Robert James Patterson (by Mike Driscoll)
-DATE        : 05/27/19
+DATE        : 06/03/19
 SYNOPSIS    : Work thru files for the 'Mouse vs. Python' MVC/CRUD tutorial. This file contains
             the classes that make the tables in the 'bookdata' database. The 
             'metadata.create_all()' statment at the end of this file is the one that will 
@@ -21,7 +21,7 @@ class OlvBook(object):
     Book model for the ObjectListView
     """
     def __init__(self, id, title, author, isbn, publisher, last_name, first_name):
-        self.id = id # primary key field
+        self.id = id
         self.title = title
         self.author = author
         self.isbn = isbn
@@ -62,5 +62,5 @@ class Book(DeclarativeBase):
 
 
 #if __name__ == "__main__":
-    # Uncomment the last line and run this file as a script to generate the database
+    
     #metadata.create_all()

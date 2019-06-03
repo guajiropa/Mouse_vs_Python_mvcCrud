@@ -1,6 +1,6 @@
 """
-AUTHOR      : Robert James Patterson (by Mike Driscoll)
-DATE        : 05/27/19
+AUTHOR      : Robert James Patterson 
+DATE        : 06/03/19
 SYNOPSIS    : Work thru files for the 'Mouse vs. Python' MVC/CRUD tutorial. This file is the heart of
                 the appliction and handles the interactions with the database.
 """
@@ -43,12 +43,47 @@ def addRecord(data):
     session.commit()
     session.close
 
+def editRecord(idNum, row):
+    """
+    Edit a record and save changes to the database.
+    """
+    book = Book()
+    book.title = row['book']['title']
+    book.isbn = row['book']['isbn']
+    book.publisher = row['book']['publisher']
+    
+    author = Person()
+    author.first_name = row['author']['first_name']
+    author.last_name = row['author']['last_name']
+    book.person = author
+
+    session = connectToDatabase()
+    record = session.query(Book).filter_by(id=idNum).one()
+    
+    record.title = book.title
+    record.person.first_name = author.first_name
+    record.person.last_name = author.last_name
+    record.isbn = book.isbn
+    record.publisher = book.publisher
+
+    session.add(record)
+    session.commit()
+    session.close()
+
+def deleteRecord(idNum):
+    """ 
+    Delete a record from the database
+    """
+    session = connectToDatabase()
+    record = session.query(Book).filter_by(id=idNum).one()
+    session.delete(record)
+    session.commit()
+    session.close()
+
 def convertResults(results):
     """
     Format the 'results' for the OlvBooks objects and return it as a list
     """
-    # Not sure of purpose, but these 'print' statements with no parameters appear in a few
-    # routines in the original tutorial.
     print
 
     books = []
@@ -64,35 +99,6 @@ def convertResults(results):
                        )
         books.append(book)
     return books
-
-def deleteRecord(idNum):
-    """ 
-    Delete a record from the database
-    """
-    session = connectToDatabase()
-    record = session.query(Book).filter_by(id=idNum).one()
-    session.delete(record)
-    session.commit()
-    session.close()
-
-def editRecord(idNum, row):
-    """
-    Edit a record and save changes to the database.
-    """
-    session = connectToDatabase()
-    record = session.query(Book).filter_by(id=idNum).one()
-    
-    print
-    
-    record.title = row['title']
-    record.person.first_name = row['first_name']
-    record.person.last_name = row['last_name']
-    record.isbn = row['isbn']
-    record.publisher = row['publisher']
-
-    session.add(record)
-    session.commit()
-    session.close()
 
 def getAllRecords():
     """ 
