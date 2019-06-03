@@ -146,6 +146,7 @@ class BookPanel(wx.Panel):
 
 class BookFrame(wx.Frame):
     """
+    Build the frame to hold the BookPanel
     """
     def __init__(self):
         """Constructor"""

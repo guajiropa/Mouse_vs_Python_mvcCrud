@@ -47,6 +47,7 @@ def editRecord(idNum, row):
     """
     Edit a record and save changes to the database.
     """
+    # Get the incoming data into object variables
     book = Book()
     book.title = row['book']['title']
     book.isbn = row['book']['isbn']
@@ -57,15 +58,18 @@ def editRecord(idNum, row):
     author.last_name = row['author']['last_name']
     book.person = author
 
+    # Create a session and a record object.
     session = connectToDatabase()
     record = session.query(Book).filter_by(id=idNum).one()
     
+    # Update the fields in the record.
     record.title = book.title
     record.person.first_name = author.first_name
     record.person.last_name = author.last_name
     record.isbn = book.isbn
     record.publisher = book.publisher
 
+    # Save to database and close connection.
     session.add(record)
     session.commit()
     session.close()
@@ -84,8 +88,6 @@ def convertResults(results):
     """
     Format the 'results' for the OlvBooks objects and return it as a list
     """
-    print
-
     books = []
     for record in results:
         author = "%s %s" % (record.person.first_name, record.person.last_name)
@@ -137,5 +139,4 @@ def searchRecords(filterChoice, keyword):
         qry = session.query(Book)
         result = qry.filter(Book.publisher.contains('%s' % keyword)).all()    
     books = convertResults(result)
-    print
     return books

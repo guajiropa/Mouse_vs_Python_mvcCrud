@@ -1,8 +1,0 @@
-numpy
-ObjectListView
-Pillow
-pip
-setuptools
-six
-SQLAlchemy>=0.5.0
-wxPython>=2.8.10.1
