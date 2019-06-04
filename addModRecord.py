@@ -16,7 +16,9 @@ class AddModRecDialog(wx.Dialog):
         wx.Dialog.__init__(self, None, title="%s Record" % title)
         self.addRecord = addRecord
         self.selectedRow = row
-
+        
+        # Determin if we are creating the dialog to add a new record or if it is to modify an
+        # exisiting record by seeing if data was passed into the class or not.
         if row:
             bTitle = self.selectedRow.title
             fName = self.selectedRow.first_name
@@ -26,6 +28,7 @@ class AddModRecDialog(wx.Dialog):
         else:
             bTitle = fName = lName = isbn = publisher = ""
 
+        # Setup the wx dialog
         size = (80, -1)
         font = wx.Font(18, wx.SWISS, wx.NORMAL, wx.BOLD)
 
@@ -77,7 +80,7 @@ class AddModRecDialog(wx.Dialog):
     
     def getData(self):
         """
-        Method to get the values from the text boxes and store them in a dictionay object.
+        Method to get the values from the text boxes and store them in dictionay objects.
         """
         dictAuthor = {}
         dictBook = {}
@@ -107,7 +110,10 @@ class AddModRecDialog(wx.Dialog):
         """ 
         Method to add a record to the database.
         """
+        # Get the text input fields from the form.
         dictAuthor, dictBook = self.getData()
+
+        # Create a dictonary of dictonaries. 
         data = ({'author': dictAuthor, 'book': dictBook})
         controller.addRecord(data)
 
@@ -123,11 +129,16 @@ class AddModRecDialog(wx.Dialog):
         """ 
         Method to edit data from the database
         """
+        # Get the text input fields from the form.
         dictAuthor, dictBook = self.getData()
+
+        # Create a dictonary of dictonaries. 
         data = ({'author': dictAuthor, 'book': dictBook})
-        
         controller.editRecord(self.selectedRow.id, data)
+        
+        # display a dialog to notify the end user that the record has been updated.
         commonDlgs.showMessageDlg("Edited Successfully!", "Success!", wx.ICON_INFORMATION)
+
         self.Destroy()
 
     def onRecord(self, event):
@@ -154,9 +165,3 @@ class AddModRecDialog(wx.Dialog):
         sizer.Add(lbl, 0, wx.ALL, 5)
         sizer.Add(txt, 1, wx.EXPAND|wx.ALL, 5)
         return sizer
-
-#if __name__ == "__main__":
-#    app = wx.App(False)
-#    dlg = AddModRecDialog()
-#    dlg.ShowModal()
-#    app.MainLoop()

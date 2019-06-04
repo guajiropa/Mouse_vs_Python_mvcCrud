@@ -149,15 +149,8 @@ class BookFrame(wx.Frame):
     Build the frame to hold the BookPanel
     """
     def __init__(self):
-        """Constructor"""
-        wx.Frame.__init__(self, None, title="MvP Media Organizer",
-                          size=(800, 600))
-        panel = BookPanel(self)
+        wx.Frame.__init__(self, None, title="MvP Media Organizer", size=(800, 600))
         
+        panel = BookPanel(self)
         self.Show()
         
-
-#if __name__ == "__main__":
-#    app = wx.App(False)
-#    frame = BookFrame()
-#    app.MainLoop()
