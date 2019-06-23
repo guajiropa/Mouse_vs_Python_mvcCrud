@@ -60,12 +60,12 @@ def editRecord(idNum, row):
     book.person = author
 
     # Create a session, query the database for the 'Book' record with the same 'Id' key
-    # and a  create a record object holding that record.
+    # and a create a record object holding that record.
     session = connectToDatabase()
     record = session.query(Book).filter_by(id=idNum).one()
     
     # Update the fields in the record with the values that were passed in.
-    record.title = row.title
+    record.title = book.title
     record.person.first_name = author.first_name
     record.person.last_name = author.last_name
     record.isbn = book.isbn
