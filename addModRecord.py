@@ -10,7 +10,7 @@ import wx
 
 class AddModRecDialog(wx.Dialog):
     """
-    The dialog used to Add / Modify records
+    This is the dialog used to Add / Modify records.
     """
     def __init__(self, row=None, title="Add", addRecord=True):
         wx.Dialog.__init__(self, None, title="%s Record" % title)
@@ -18,7 +18,7 @@ class AddModRecDialog(wx.Dialog):
         self.selectedRow = row
         
         # Determin if we are creating the dialog to add a new record or if it is to modify an
-        # exisiting record by seeing if data was passed into the class or not.
+        # exisiting record by seeing if a data record was passed into the class or not.
         if row:
             bTitle = self.selectedRow.title
             fName = self.selectedRow.first_name
@@ -37,7 +37,7 @@ class AddModRecDialog(wx.Dialog):
         authorSizer = wx.BoxSizer(wx.HORIZONTAL)
         btnSizer = wx.BoxSizer(wx.HORIZONTAL)
 
-        # Create some widgits
+        # Create the dialog header
         lblNewRec = wx.StaticText(self, label=('%s' % title))
         lblNewRec.SetFont(font)
         mainSizer.Add(lblNewRec, 0, wx.CENTER)
