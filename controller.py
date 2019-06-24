@@ -27,6 +27,8 @@ def addRecord(data):
              "publisher":"Packt"}
     )
     """
+    # Create an instance of the Book and Person classes and populate them with the values
+    # collected from the 'Add' dialog and passed in as the tuple of dictionaries.
     book = Book()
     book.title = data['book']['title']
     book.isbn = data['book']['isbn']
@@ -43,9 +45,16 @@ def addRecord(data):
     session.commit()
     session.close
 
-def editRecord(idNum, row):
+def editRecord(idNum, data):
     """
-    Edit a record and save changes to the database.
+    Edit a record and save changes to the database. The 'idNum' parameter is the id of the 
+    record to edit. The incoming 'data' parameter is again, a tuple of two dictionaries in 
+    the following format:
+    
+    ("author":{"first_name":"John", "last_name":"Doe"},
+     "book":{"title":"Some book", "isbn":"1234567890", 
+             "publisher":"Packt"}
+    )
     """
     # Create a session, query the database for the 'Book' record with the same 'Id' key
     # and a create a record object holding that record.
@@ -53,11 +62,11 @@ def editRecord(idNum, row):
     record = session.query(Book).filter_by(id=idNum).one()
     
     # Update the fields in the record with the values that were passed in.
-    record.title = row['book']['title']
-    record.person.first_name = row['author']['first_name']
-    record.person.last_name = row['author']['last_name']
-    record.isbn = row['book']['isbn']
-    record.publisher = row['book']['publisher']
+    record.title = data['book']['title']
+    record.person.first_name = data['author']['first_name']
+    record.person.last_name = data['author']['last_name']
+    record.isbn = data['book']['isbn']
+    record.publisher = data['book']['publisher']
 
     # Save to database and close connection.
     session.add(record)
