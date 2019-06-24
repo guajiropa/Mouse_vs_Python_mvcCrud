@@ -1,6 +1,6 @@
 """
 AUTHOR      : Robert James Patterson 
-DATE        : 05/27/19
+DATE        : 06/23/19
 SYNOPSIS    : Work thru files for the 'Mouse vs. Python' MVC/CRUD tutorial.
 """
 import addModRecord
@@ -143,6 +143,9 @@ class BookPanel(wx.Panel):
         """
         wx.Exit()
 
+    def __repr__(self):
+        return "Panel for the Object List View" 
+
 
 class BookFrame(wx.Frame):
     """
@@ -153,4 +156,6 @@ class BookFrame(wx.Frame):
         
         panel = BookPanel(self)
         self.Show()
+
+     
         

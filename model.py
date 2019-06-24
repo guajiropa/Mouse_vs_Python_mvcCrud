@@ -57,10 +57,10 @@ class Book(DeclarativeBase):
     publisher = Column('publisher', Unicode)
     person = relation('Person', backref = 'books', cascade_backrefs = False)
 
-    def __repl__(self):
+    def __repr__(self):
         return "<%s released by %s>" % (str(self.title), str(self.publisher))
 
 
 #if __name__ == "__main__":
-    
+    # Uncomment the line below to create the datadase.
     #metadata.create_all()
