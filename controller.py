@@ -47,29 +47,17 @@ def editRecord(idNum, row):
     """
     Edit a record and save changes to the database.
     """
-    # Create an empty 'Book' and 'Person' object and load the incoming data dictionaries 
-    # from 'onEdit' in the 'addModRecords.py' into their corresponding object variables.
-    book = Book()
-    book.title = row['book']['title']
-    book.isbn = row['book']['isbn']
-    book.publisher = row['book']['publisher']
-    
-    author = Person()
-    author.first_name = row['author']['first_name']
-    author.last_name = row['author']['last_name']
-    book.person = author
-
     # Create a session, query the database for the 'Book' record with the same 'Id' key
     # and a create a record object holding that record.
     session = connectToDatabase()
     record = session.query(Book).filter_by(id=idNum).one()
     
     # Update the fields in the record with the values that were passed in.
-    record.title = book.title
-    record.person.first_name = author.first_name
-    record.person.last_name = author.last_name
-    record.isbn = book.isbn
-    record.publisher = book.publisher
+    record.title = row['book']['title']
+    record.person.first_name = row['author']['first_name']
+    record.person.last_name = row['author']['last_name']
+    record.isbn = row['book']['isbn']
+    record.publisher = row['book']['publisher']
 
     # Save to database and close connection.
     session.add(record)
