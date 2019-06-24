@@ -1,8 +1,8 @@
 """
 AUTHOR      : Robert James Patterson 
 DATE        : 06/23/19
-SYNOPSIS    : Work thru files for the 'Mouse vs. Python' MVC/CRUD tutorial. This file is the heart of
-                the appliction and handles the interactions with the database.
+SYNOPSIS    : Work thru files for the 'Mouse vs. Python' MVC/CRUD tutorial. This file is the heart
+            of the appliction and handles the interactions with the database.
 """
 from model import Book, Person, OlvBook
 from sqlalchemy import create_engine
@@ -48,13 +48,7 @@ def addRecord(data):
 def editRecord(idNum, data):
     """
     Edit a record and save changes to the database. The 'idNum' parameter is the id of the 
-    record to edit. The incoming 'data' parameter is again, a tuple of two dictionaries in 
-    the following format:
-    
-    ("author":{"first_name":"John", "last_name":"Doe"},
-     "book":{"title":"Some book", "isbn":"1234567890", 
-             "publisher":"Packt"}
-    )
+    record to edit. The incoming 'data' parameter is again, a tuple of two dictionaries.
     """
     # Create a session, query the database for the 'Book' record with the same 'Id' key
     # and a create a record object holding that record.
