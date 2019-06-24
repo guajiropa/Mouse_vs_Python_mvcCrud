@@ -120,7 +120,6 @@ def searchRecords(filterChoice, keyword):
                 records.append(book)
 
         result = records
-        print(result)
 
     elif filterChoice == 'Title':
         qry = session.query(Book)
